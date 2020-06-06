@@ -1,5 +1,5 @@
 # databaseProject
-It is a web service that provides information for students who wants to enter a university by using a CSAT score.
+It is a web service that provides information for students who want to enter a university by using a CSAT score.
 
-# Start
+# start
 ```nodemon app.js```
