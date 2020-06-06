@@ -1,0 +1,27 @@
+{
+  "name": "databaseproject",
+  "version": "1.0.0",
+  "description": "2020-1 database project",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/minjaec023/databaseProject.git"
+  },
+  "keywords": [
+    "database"
+  ],
+  "author": "Minjae Cho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/minjaec023/databaseProject/issues"
+  },
+  "homepage": "https://github.com/minjaec023/databaseProject#readme",
+  "dependencies": {
+    "ejs": "^3.1.3",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  }
+}
