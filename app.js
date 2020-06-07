@@ -1,53 +1,23 @@
-var express = require('express');
-var mysql = require('mysql');
-var bodyParser = require('body-parser');
-var ejs = require('ejs');
-var crypto = require('crypto');
-var dbConfig = require('./dbConfig');
+const express = require('express');
+const bodyParser = require('body-parser');
+const ejs = require('ejs');
 
-var app = express();
-var dbOptions = {
-    host: dbConfig.host,
-    port: dbConfig.port,
-    user: dbConfig.user,
-    password: dbConfig.password,
-    database: dbConfig.database
-};
+const app = express();
+const login = require('./routes/login.js');
+app.use(login);
+const signup = require('./routes/signup.js');
+app.use(signup);
+const recom = require('./routes/recom.js');
+app.use(recom);
+const review = require('./routes/review.js');
+app.use(review);
 
-var conn = mysql.createConnection(dbOptions);
-conn.connect();
-
+app.use(express.static(__dirname + '/views'));
 app.set('view engine', 'ejs');
-app.set('views', './views');
 app.use(bodyParser.urlencoded({ extended: false}));
 
 app.get('/', function(req, res){
-    res.send('<a href="/login">login</a>');
-});
-app.get('/login', function(req, res){
-    res.render('login');
-});
-
-app.post('/login', function(req, res){
-    var id = req.body.userid;
-    var pw = req.body.password;
-    var sql = 'SELECT * FROM USER WHERE USER_ID=?';
-    conn.query(sql, [id], function(err, results){
-        if(err) console.log(err);
-        if(!results[0])
-            return res.send('<script type="text/javascript"> alert("아이디를 다시 확인해주세요!"); </script>');
-        var user = results[0];
-        
-        if(pw === user.USER_PW){
-            var username = user.USER_NAME;
-            return res.send(
-            '<script type="text/javascript"> alert("환영합니다!"); </script>'
-            );
-        }
-        else {
-            return res.send('<script type="text/javascript"> alert("비밀번호를 다시 확인해주세요!"); </script>');
-        }
-    });
+    res.render('main.ejs')
 });
 
 app.listen(3000, function(){
