@@ -1,13 +1,77 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel = "stylesheet" type = "text/css" href = "css/style.css">
-        <title>Main Screen</title>
-        <button><a href="/login">로그인</a></button>
-        <button><a href="/signup">회원가입</a></button>
-        <h1>Project Name</h1>
-    </head>
-    <body>
-        <p>추천추천</p>
-    </body>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Main Screen</title>
+    <button><a href="/login">로그인</a></button>
+    <button><a href="/signup">회원가입</a></button>
+    <h1>Project Name</h1>
+</head>
+
+<body>
+    <p align="center">성적 정보를 입력해주세요.</p>
+    <form align="center">
+        국어
+        <input type="number" name="kor_p" placeholder="백분위" />
+        <input type="number" name="kor_s" placeholder="표준점수" /><br />
+        수학
+        <input type="number" name="mat_p" placeholder="백분위" />
+        <input type="number" name="mat_s" placeholder="표준점수" /><br />
+        영어
+        <input type="number" name="eng" placeholder="등급" />
+        <br />
+        탐구
+        <input type="number" name="inq_p" placeholder="백분위" />
+        <input type="number" name="inq_s" placeholder="표준점수" /><br />
+        <br />
+        <input type="submit" />
+    </form>
+    <br />
+    <br />
+    <p align="center">내 점수 추천 대학은?</p>
+    <table border="1" align="center" width="800px" cellspacing="0">
+        <tr>
+            <th>
+                대학
+            </th>
+            <th>
+                학과
+            </th>
+            <th>
+                커트라인 백분위
+            </th>
+            <th>
+                커트라인 표준점수
+            </th>
+            <th>
+                대학별 나의 백분위
+            </th>
+            <th>
+                대학별 나의 표준점수
+            </th>
+        </tr>
+        <tr align="center">
+            <td>
+                아주대학교
+            </td>
+            <td>
+                소프트웨어학과
+            </td>
+            <td>
+                123
+            </td>
+            <td>
+                456
+            </td>
+            <td>
+                123
+            </td>
+            <td>
+                456
+            </td>
+        </tr>
+    </table>
+</body>
+
 </html>
