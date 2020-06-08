@@ -2,8 +2,8 @@ var dbConfig = {
     host: 'localhost',
     port: 3306,
     user: 'root',
-    password: 'ajou',
-    database: 'databaseProject'
+    password: '1234',
+    database: 'db_project'
 };
 
 module.exports = dbConfig;
