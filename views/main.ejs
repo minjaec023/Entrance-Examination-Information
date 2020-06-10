@@ -3,8 +3,13 @@
     <head>
         <link rel = "stylesheet" type = "text/css" href = "css/style.css">
         <title>Main Screen</title>
+        <% if (!isAuthenticated) { %>
         <button><a href="/login">로그인</a></button>
         <button><a href="/signup">회원가입</a></button>
+        <% } else { %>
+        <a>로그인 성공</a>
+        <button><a href="/logout">로그아웃</a></button>
+        <% } %>
         <h1>Project Name</h1>
     </head>
     <body>
