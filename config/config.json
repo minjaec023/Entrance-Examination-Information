@@ -1,0 +1,10 @@
+{
+    "development": {
+      "username": "root",
+      "password": "ajou",
+      "database": "databaseProject",
+      "host": "localhost",
+      "dialect": "mysql",
+      "operatorAliases": false
+    }
+  }

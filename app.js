@@ -2,14 +2,18 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 
-const app = express();
 const login = require('./routes/login.js');
-app.use(login);
 const signup = require('./routes/signup.js');
-app.use(signup);
 const recom = require('./routes/recom.js');
-app.use(recom);
 const review = require('./routes/review.js');
+
+const seqeulize = require('./models').sequelize;
+const app = express();
+seqeulize.sync();
+
+app.use(login);
+app.use(signup);
+app.use(recom);
 app.use(review);
 
 app.use(express.static(__dirname + '/views'));
