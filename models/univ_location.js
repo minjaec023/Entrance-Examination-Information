@@ -2,12 +2,8 @@ module.exports = (sequelize, DataTypes) => {
   let univlocmodel = sequelize.define(
     "UnivLocation",
     {
-      univ_id: {
-        type: DataTypes.INTEGER(10),
-        unique: true,
-        allowNull: false,
-        primaryKey: true,
-      },
+      /* columns */
+
       do: {
         type: DataTypes.STRING(30),
       },
@@ -18,20 +14,22 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(30),
       },
       latitude: {
-        type: DataTypes.DOUBLE(30),
+        type: DataTypes.DOUBLE,
         allowNull: false,
       },
       longirude: {
-        type: DataTypes.DOUBLE(30),
+        type: DataTypes.DOUBLE,
         allowNull: false,
       },
     },
     {
+      /* options */
+
       tableName: "univlocation",
+      timestamps: false,
+      charset: "utf8",
     }
   );
   univlocmodel.removeAttribute("id");
-  univlocmodel.removeAttribute("createdAt");
-  univlocmodel.removeAttribute("updatedAt");
   return univlocmodel;
 };

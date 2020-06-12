@@ -2,15 +2,12 @@ module.exports = (sequelize, DataTypes) => {
   let engratiomodel = sequelize.define(
     "EngRatio",
     {
-      univ_id: {
-        type: DataTypes.INTEGER(10),
-        unique: true,
-        allowNull: false,
-        primaryKey: true,
-      },
+      /* columns */
+
       division: {
         type: DataTypes.INTEGER(3),
         allowNull: false,
+        primaryKey: true,
       },
       first_grade: {
         type: DataTypes.INTEGER(10),
@@ -38,11 +35,12 @@ module.exports = (sequelize, DataTypes) => {
       },
     },
     {
+      /* options */
+
       tableName: "engratio",
+      timestamps: false,
     }
   );
   engratiomodel.removeAttribute("id");
-  engratiomodel.removeAttribute("createdAt");
-  engratiomodel.removeAttribute("updatedAt");
   return engratiomodel;
 };

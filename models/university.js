@@ -1,6 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
   let universitymodel = sequelize.define(
     "University",
+    /* columns */
     {
       univ_id: {
         type: DataTypes.INTEGER(10),
@@ -12,13 +13,13 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING(100),
         allowNull: false,
       },
-    },
+    } /* options */,
     {
       tableName: "university",
+      timestamps: false,
+      charset: "utf8",
     }
   );
   universitymodel.removeAttribute("id");
-  universitymodel.removeAttribute("createdAt");
-  universitymodel.removeAttribute("updatedAt");
   return universitymodel;
 };
