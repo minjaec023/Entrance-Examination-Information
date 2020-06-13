@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Main Screen</title>
+
+    <h1>Project Name</h1>
+</head>
+
+<body>
+    <p align="center">대학별 반영비</p>
+    <button>
+        <a href='/criterias/<%= division === "1" ? "2" : "1" %>'>
+            <%= division === "1" ? '인문' : '자연'%> 기준으로 보기
+        </a>
+    </button>
+    <table border="1" align="center" width="800px" cellspacing="0">
+        <tr>
+            <th>대학</th>
+            <th>구분</th>
+            <th>국어</th>
+            <th>수학</th>
+            <th>영어</th>
+            <th>탐구</th>
+        </tr>
+        <% for (let cri of criterias) {  %>
+        <tr align="center">
+            <td><%= cri.University.univ_name %></td>
+            <td><%= cri.division == 1 ? '자연' : '인문' %></td>
+            <td><%= cri.c_korean %></td>
+            <td><%= cri.c_math %></td>
+            <td><%= cri.c_english %></td>
+            <td><%= cri.c_inquiry %></td>
+        </tr>
+        <% } %>
+    </table>
+</body>
+
+</html>
