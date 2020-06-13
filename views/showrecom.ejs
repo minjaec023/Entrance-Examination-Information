@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Main Screen</title>
+
+    <h1>Project Name</h1>
+</head>
+
+<body>
+    <p align="center">나의 표준점수 합: <%=std_score%></p>
+    <p align="center">나의 추천 학과</p>
+
+    <table border="1" align="center" width="800px" cellspacing="0">
+        <tr>
+            <th>대학</th>
+            <th>학과</th>
+            <th>표준점수</th>
+        </tr>
+        <% for (let res of result) {  %>
+        <tr align="center">
+            <td><%= res.University.univ_name %></td>
+            <td><%= res.depart_name %></td>
+            <td><%= res.standard_score %></td>
+        </tr>
+        <% } %>
+    </table>
+</body>
+
+</html>

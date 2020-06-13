@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Main Screen</title>
+
+    <h1>Project Name</h1>
+</head>
+
+<body>
+    <p align="center">내 대학별 점수</p>
+
+    <table border="1" align="center" width="800px" cellspacing="0">
+        <tr>
+            <th>대학</th>
+            <th>점수</th>
+        </tr>
+        <% for (let grade of list) {  %>
+        <tr align="center">
+            <td><%= grade.univ_name %></td>
+            <td><%= grade.grade %></td>
+        </tr>
+        <% } %>
+    </table>
+</body>
+
+</html>
