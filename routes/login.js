@@ -32,7 +32,7 @@ router.post('/login', function(req, res, next){
             },
             secretObj.secret ,
             {
-                expiresIn: '10m'
+                expiresIn: '100m'
             })
             res.cookie("user", token);
             res.send('<script type="text/javascript"> alert("환영합니다!"); location.href="/"</script>');

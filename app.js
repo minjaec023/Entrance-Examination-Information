@@ -5,13 +5,15 @@ const ejs = require("ejs");
 let jwt = require("jsonwebtoken");
 let secretObj = require("./config/jwt");
 
-const login = require("./routes/login.js");
-const signup = require("./routes/signup.js");
-const recom = require("./routes/recom.js");
-const review = require("./routes/review.js");
-const logout = require("./routes/logout.js");
+const login = require('./routes/login.js');
+const signup = require('./routes/signup.js');
+const recom = require('./routes/recom.js');
+const review = require('./routes/review.js');
+const logout = require('./routes/logout.js');
+const userscore = require('./routes/userscore.js');
 
-const seqeulize = require("./models").sequelize;
+
+const seqeulize = require('./models').sequelize;
 const app = express();
 seqeulize.sync();
 
@@ -20,6 +22,7 @@ app.use(signup);
 app.use(recom);
 app.use(review);
 app.use(logout);
+app.use(userscore);
 
 app.use(express.static(__dirname + "/views"));
 app.set("view engine", "ejs");

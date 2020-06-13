@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel = "stylesheet" type = "text/css" href = "css/style.css">
+        <title>Main Screen</title>
+        <% if (!isAuthenticated) { %>
+        <button><a href="/login">로그인</a></button>
+        <button><a href="/signup">회원가입</a></button>
+        <% } else { %>
+        <button><a href="/userscore">내 정보</a></button>
+        <button><a href="/logout">로그아웃</a></button>
+        <% } %>
+        <h1>Project Name</h1>
+    </head>
+    <body>
+        <form align="center">
+            <p>
+                <strong>아이디 : </strong>
+                <% var id = user_id %>
+                <a>
+                    <%= id %>
+                </a>
+            </p>
+            <p>
+                <strong>이름 : </strong>
+                <% var name = user_name %>
+                <a>
+                    <%= user_name %>
+                </a>
+            </p>
+            <p>
+                <strong>성적 정보</strong>
+            </p>
+            <table border="2" align="center" width="1000px" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>달</th>
+                        <th>표준점수/백분위</th>
+                        <th>국어</th>
+                        <th>수학</th>
+                        <th>영어</th>
+                        <th>탐구</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr align="center">
+                        <% var month = month %>
+                        <% var sp = sp %>
+                        <% var korean = korean %>
+                        <% var math = math %>
+                        <% var english = english %>
+                        <% var inquiry = inquiry %>
+                        <td><%= month %></td>
+                        <% if(sp=='s') {%>
+                        <td>표준점수</td>
+                        <% } else { %>
+                        <td>백분위</td>
+                        <% } %>
+                        <td><%= korean %></td>
+                        <td><%= math %></td>
+                        <td><%= english %></td>
+                        <td><%= inquiry %></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <button ><a href="/modifyuserscore">내 정보 수정하기</a></button>
+        </form>
+    </body>
+</html>
