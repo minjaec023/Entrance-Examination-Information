@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel = "stylesheet" type = "text/css" href = "css/style.css">
+        <title>Main Screen</title>
+        <% if (!isAuthenticated) { %>
+        <button><a href="/login">로그인</a></button>
+        <button><a href="/signup">회원가입</a></button>
+        <% } else { %>
+        <button><a href="/userscore">내 정보</a></button>
+        <button><a href="/logout">로그아웃</a></button>
+        <% } %>
+        <h1>Project Name</h1>
+    </head>
+    <body>
+        <table border="2" align="center" width="1000px" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>달</th>
+                    <th>표준점수/백분위</th>
+                    <th>국어</th>
+                    <th>수학</th>
+                    <th>영어</th>
+                    <th>탐구</th>
+                </tr>
+            </thead>
+            <tbody>
+                <form align="center" action="/insertscore" method="post">
+                <tr textalign="center">
+                        <td><input type="text" name="month"></td>
+                        <td><select name="sp">
+                         
+                            <option value="s">표준점수</option>
+                            <option value="p">백분위</option>
+                            
+                        </select></td>
+                        <td><input type="text" name="korean"></td>
+                        <td><input type="text" name="math"></td>
+                        <td><input type="text" name="english"></td>
+                        <td><input type="text" name="inquiry"></td>
+                    </tr>
+                </tbody>
+            </table>
+        <button type="submit" value="제출">제출</button>
+        </form>
+    </body>
+</html>

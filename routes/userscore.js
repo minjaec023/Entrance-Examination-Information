@@ -7,8 +7,12 @@ const { User_score} = require('../models');
 const router = express.Router();
 
 const modifyuserscore = require('./modifyuserscore.js');
+const insertscore = require('./insertscore.js');
+const deletescore = require('./deletescore.js');
 
 router.use(modifyuserscore);
+router.use(insertscore);
+router.use(deletescore);
 
 router.use(bodyParser.urlencoded({ extended: false}));
 
@@ -16,8 +20,7 @@ router.get('/userscore', function(req, res, next){
     let token = req.cookies.user;
     let isAuthenticated;
     let decoded;
-    let user_name;
-    
+    let results = [];
     try {
         decoded = jwt.verify(token, secretObj.secret);
     } catch (error) {
@@ -29,35 +32,30 @@ router.get('/userscore', function(req, res, next){
     else{
         isAuthenticated = false;
     }
+    let user_name;
     //아이디, 이름 받아오기
-    User_score.findOne({
-        where: {month : 6},
-        include: [{
-            model: User,
-            where: {user_id : decoded.user_id}
-        }]
+    User.findOne({
+        where: {user_id : decoded.user_id},
     })
     .then((user) => {
-        console.log(user);
-        try {
-            user_name = user.User.user_name;
-            res.render('userscore', {
-                isAuthenticated : isAuthenticated, 
-                user_id : decoded.user_id, 
+        user_name = user.user_name;
+    })
+    .then(() => {
+        User_score.findAll({
+            where: {user_id : decoded.user_id}
+        })
+        .then((scores) => {
+            for(let i=0;i<scores.length;i++){
+                results.push(scores);
+            }
+            res.render("userscore", {
+                isAuthenticated : isAuthenticated,
+                user_id : decoded.user_id,
                 user_name : user_name,
-                month : user.month,
-                sp : user.sp,
-                korean : user.korean,
-                math : user.math,
-                english : user.english,
-                inquiry : user.inquiry
+                results: scores
             });
-        } catch (error) {
-            console.log(error);
-        }
+        });
     });
-    //점수 받아오기
-    //
 });
 
 module.exports = router;

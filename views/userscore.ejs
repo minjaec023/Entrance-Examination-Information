@@ -13,7 +13,7 @@
         <h1>Project Name</h1>
     </head>
     <body>
-        <form align="center">
+       
             <p>
                 <strong>아이디 : </strong>
                 <% var id = user_id %>
@@ -31,6 +31,9 @@
             <p>
                 <strong>성적 정보</strong>
             </p>
+            <% if(!results[0]) {%>
+                <p>등록된 정보가 없습니다!</p>
+            <% } else { %>
             <table border="2" align="center" width="1000px" cellspacing="0">
                 <thead>
                     <tr>
@@ -43,28 +46,31 @@
                     </tr>
                 </thead>
                 <tbody>
+                <% if(results){
+                    for(let result of results){ %>
                     <tr align="center">
-                        <% var month = month %>
-                        <% var sp = sp %>
-                        <% var korean = korean %>
-                        <% var math = math %>
-                        <% var english = english %>
-                        <% var inquiry = inquiry %>
-                        <td><%= month %></td>
-                        <% if(sp=='s') {%>
-                        <td>표준점수</td>
-                        <% } else { %>
-                        <td>백분위</td>
-                        <% } %>
-                        <td><%= korean %></td>
-                        <td><%= math %></td>
-                        <td><%= english %></td>
-                        <td><%= inquiry %></td>
+                        <form action="/modifyuserscore" method="post">
+                        <td><input type="text" name="month" value="<%= result.month %>" readonly style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
+                            
+                            <% if(result.sp=='s') {%>
+                                <td><input type="text" name="sp" value="표준점수" readonly style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
+                            <% } else { %>
+                                <td><input type="text" name="sp" value="백분위" readonly style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
+                            <% } %>
+                     
+                        <td><input type="text" name="korean" value="<%= result.korean %>"></input></td>
+                        <td><input type="text" name="math" value="<%= result.math %>"></input></td>
+                        <td><input type="text" name="english" value="<%= result.english %>"></input></td>
+                        <td><input type="text" name="inquiry" value="<%= result.inquiry %>"></input></td>
+                        <td><button type="submit" name="button" value="modify" >수정하기</button></td>
+                        <td><button type="submit" name="button" value="delete" >삭제하기</button></td>
+                        </form>
                     </tr>
+                    <% } %>
+                <% } %>
                 </tbody>
             </table>
-            
-            <button ><a href="/modifyuserscore">내 정보 수정하기</a></button>
-        </form>
+            <% } %>
+            <button><a href="/insertscore">성적 입력하기</a></button>
     </body>
 </html>

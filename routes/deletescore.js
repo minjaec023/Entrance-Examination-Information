@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.use(bodyParser.urlencoded({ extended: false}));
 
-router.post('/modifyuserscore', function(req, res, next){
+router.post('/deletescore', function(req, res, next){
     let token = req.cookies.user;
     let isAuthenticated;
     let decoded;
@@ -29,7 +29,7 @@ router.post('/modifyuserscore', function(req, res, next){
     let math = req.body.math;
     let english = req.body.english;
     let inquiry = req.body.inquiry
-    if(req.body.button == "modify"){
+    console.log(sp);
     User_score.update({
         korean: korean, 
         english: english, 
@@ -44,24 +44,8 @@ router.post('/modifyuserscore', function(req, res, next){
         res.send('<script type="text/javascript"> alert("수정이 완료되었습니다!");location.href="/userscore" </script>');
     })
     .catch(err => {
-        console.error(err);
+        console.log(err);
       });
-    }
-    else{
-        User_score.destroy({
-            where: {
-                user_id: decoded.user_id,
-                month: month, 
-                sp: sp
-            }
-        })
-        .then(result => {
-            res.send('<script type="text/javascript"> alert("삭제가 완료되었습니다!");location.href="/userscore" </script>');
-        })
-        .catch(err => {
-            console.error(err);
-        });
-    }
 })
 
 module.exports = router;
