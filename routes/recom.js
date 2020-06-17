@@ -10,6 +10,7 @@ const { University } = require("../models");
 const { UnivCriteria } = require("../models");
 const { EngRatio } = require("../models");
 const { Department } = require("../models");
+const { User_score } = require("../models");
 
 router.use(bodyParser.urlencoded({ extended: false }));
 
@@ -17,6 +18,7 @@ router.get("/recom", function (req, res, next) {
   let token = req.cookies.user;
   let isAuthenticated;
   let decoded;
+
   try {
     decoded = jwt.verify(token, secretObj.secret);
   } catch (error) {
@@ -27,21 +29,57 @@ router.get("/recom", function (req, res, next) {
   } else {
     isAuthenticated = false;
   }
-  res.render("recom", { isAuthenticated: isAuthenticated });
+
+  let list = [];
+
+  User_score.findAll({
+    where: { user_id: decoded.user_id },
+  }).then((scores) => {
+    for (let score of scores) {
+      let result = {};
+      result.month = score.month;
+      result.sum = score.korean + score.math + score.inquiry;
+      result.eng = score.english;
+      result.sp = score.sp == "s" ? "표준점수" : "백분위";
+
+      list.push(result);
+
+      if (list.length == scores.length)
+        res.render("recom", {
+          list,
+          isAuthenticated,
+        });
+    }
+  });
 });
 
-router.get("/showrecom", function (req, res, next) {
-  const { kor_p, mat_p, inq_p } = req.query;
-  const { kor_s, mat_s, inq_s } = req.query;
-  let sum_s = parseInt(kor_s) + parseInt(mat_s) + parseInt(inq_s);
+router.get("/showrecom/:score", function (req, res, next) {
+  const score = req.params.score;
+
+  let token = req.cookies.user;
+  let isAuthenticated;
+  let decoded;
+
+  try {
+    decoded = jwt.verify(token, secretObj.secret);
+  } catch (error) {
+    decoded = false;
+  }
+  if (decoded) {
+    isAuthenticated = true;
+  } else {
+    isAuthenticated = false;
+  }
+
   Department.findAll({
     include: [{ model: University }],
-    where: { standard_score: { [Op.lt]: sum_s } },
+    where: { standard_score: { [Op.lt]: score } },
     order: [["standard_score", "DESC"]],
   }).then(function (result) {
     res.render("showrecom", {
-      std_score: sum_s,
+      std_score: score,
       result,
+      isAuthenticated,
     });
   });
 });
@@ -50,6 +88,18 @@ router.get("/criterias/:division", function (req, res, next) {
   let token = req.cookies.user;
   let isAuthenticated;
   let division = req.params.division;
+  let decoded;
+
+  try {
+    decoded = jwt.verify(token, secretObj.secret);
+  } catch (error) {
+    decoded = false;
+  }
+  if (decoded) {
+    isAuthenticated = true;
+  } else {
+    isAuthenticated = false;
+  }
 
   UnivCriteria.findAll({
     include: [{ model: University }],
@@ -59,58 +109,82 @@ router.get("/criterias/:division", function (req, res, next) {
       criterias: result,
       univ_name: result[0].University.univ_name,
       division: division,
+      isAuthenticated,
     });
   });
 });
 
-router.post("/calcgrade", function (req, res, next) {
-  const { kor_s, mat_s, inq_s } = req.body;
-  const { eng } = req.body;
-  let list = [];
-  UnivCriteria.findAll({
-    include: [{ model: University }],
-  }).then(function (results) {
-    for (let result of results) {
-      let calc = {};
-      calc.univ_name = result.University.univ_name;
-      let korean = result.c_korean * kor_s;
-      let math = result.c_math * mat_s;
-      let inquiry = result.c_inquiry * inq_s;
-      let en;
+router.get("/calcgrade/:division", function (req, res, next) {
+  let token = req.cookies.user;
+  let isAuthenticated;
+  let decoded;
+  let division = req.params.division;
 
-      EngRatio.findOne({ where: { univ_id: result.University.univ_id } })
-        .then(function (en_ratio) {
-          switch (eng) {
-            case "1":
-              en = en_ratio.first_grade;
-              break;
-            case "2":
-              en = en_ratio.second_grade;
-              break;
-            case "3":
-              en = en_ratio.third_grade;
-              break;
-            case "4":
-              en = en_ratio.fourth_grade;
-              break;
-            case "5":
-              en = en_ratio.fifth_grade;
-              break;
-            case "6":
-              en = en_ratio.sixth_grade;
-              break;
-            default:
-              en = 0;
-          }
-          en = en * result.c_english;
-          calc.grade = (korean + math + inquiry + en) / 100;
-        })
-        .then(() => {
-          list.push(calc);
-          if (list.length === results.length)
-            res.render("showgrade", { list: list });
-        });
-    }
+  try {
+    decoded = jwt.verify(token, secretObj.secret);
+  } catch (error) {
+    decoded = false;
+  }
+  if (decoded) {
+    isAuthenticated = true;
+  } else {
+    isAuthenticated = false;
+  }
+
+  let list = [];
+  User_score.findOne({
+    where: { user_id: decoded.user_id },
+  }).then(function (score) {
+    UnivCriteria.findAll({
+      include: [{ model: University }],
+      where: { division: division },
+    }).then(function (results) {
+      for (let result of results) {
+        let calc = {};
+        calc.univ_name = result.University.univ_name;
+        let korean = result.c_korean * score.korean;
+        let math = result.c_math * score.math;
+        let inquiry = result.c_inquiry * score.inquiry;
+        let en;
+
+        EngRatio.findOne({ where: { univ_id: result.University.univ_id } })
+          .then(function (en_ratio) {
+            switch (score.english) {
+              case "1":
+                en = en_ratio.first_grade;
+                break;
+              case "2":
+                en = en_ratio.second_grade;
+                break;
+              case "3":
+                en = en_ratio.third_grade;
+                break;
+              case "4":
+                en = en_ratio.fourth_grade;
+                break;
+              case "5":
+                en = en_ratio.fifth_grade;
+                break;
+              case "6":
+                en = en_ratio.sixth_grade;
+                break;
+              default:
+                en = 0;
+            }
+            en = en * result.c_english;
+            calc.grade = (korean + math + inquiry + en) / 100;
+          })
+          .then(() => {
+            list.push(calc);
+            if (list.length === results.length) {
+              list.sort(function (a, b) {
+                return a.grade > b.grade ? -1 : a.grade < b.grade ? 1 : 0;
+              });
+              res.render("showgrade", { list: list.sort(), isAuthenticated });
+            }
+          });
+      }
+    });
   });
 });
 

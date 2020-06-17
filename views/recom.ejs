@@ -1,38 +1,49 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <link rel = "stylesheet" type = "text/css" href = "css/style.css">
-        <title>Main Screen</title>
-        <% if (!isAuthenticated) { %>
-        <button><a href="/login">로그인</a></button>
-        <button><a href="/signup">회원가입</a></button>
-        <% } else { %>
-        <button><a href="/userscore">내 정보</a></button>
-        <button><a href="/logout">로그아웃</a></button>
-        <% } %>
-        <h1>Project Name</h1>
-    </head>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Main Screen</title>
+    <% if (!isAuthenticated) { %>
+    <button><a href="/login">로그인</a></button>
+    <button><a href="/signup">회원가입</a></button>
+    <% } else { %>
+    <button><a href="/userscore">내 정보</a></button>
+    <button><a href="/logout">로그아웃</a></button>
+    <% } %>
+    <h1>Project Name</h1>
+</head>
 
 <body>
-    <button><a href="/criterias/1">대학별 반영비 보기</a></button>
-    <form action="/showrecom" method="get" align="center">
-        국어
-        <input type="number" name="kor_p" placeholder="백분위" />
-        <input type="number" name="kor_s" placeholder="표준점수" /><br />
-        수학
-        <input type="number" name="mat_p" placeholder="백분위" />
-        <input type="number" name="mat_s" placeholder="표준점수" /><br />
-        영어
-        <input type="number" name="eng" placeholder="등급" />
+    <div align="center">
+        <p>확인할 점수를 선택해주세요</p>
+        <p>정보는 [내 정보]에서 수정 및 삭제 가능합니다</p>
         <br />
-        탐구 2개 합
-        <input type="number" name="inq_p" placeholder="백분위" />
-        <input type="number" name="inq_s" placeholder="표준점수" /><br />
-        <br />
-        <input type="submit" />
-    </form>
-
+    </div>
+    <table border="1" width="600px" cellspacing="0" align="center">
+        <thead>
+            <tr>
+                <th>월</th>
+                <th>표준점수/백분위</th>
+                <th>총합</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody align="center">
+            <tr>
+                <% for (let score of list) { %>
+                <td><%= score.month %></td>
+                <td><%= score.sp %></td>
+                <td><%= score.sum %></td>
+                <td>
+                    <button><a href="/showrecom/<%= score.sum %>">추천 학과 보기</a></button>
+                    <button><a href="/calcgrade/1">대학별 점수 보기</a></button>
+                    <button><a href="/userscore">수정/삭제</a></button>
+                </td>
+                <% } %>
+            </tr>
+        </tbody>
+    </table>
 </body>
 
 </html>
