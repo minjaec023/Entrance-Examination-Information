@@ -27,6 +27,7 @@ db.UnivCriteria = require("./univ_criteria")(sequelize, Sequelize);
 db.EngRatio = require("./eng_ratio")(sequelize, Sequelize);
 db.UnivLocation = require("./univ_location")(sequelize, Sequelize);
 
+db.Review = require("./review")(sequelize, Sequelize);
 /* 모델 관계 정의 */
 
 db.Department.belongsTo(db.University, {
@@ -52,6 +53,16 @@ db.UnivLocation.belongsTo(db.University, {
 db.User_score.belongsTo(db.User, {
   foreignKey: { name: "user_id", allowNull: false, primaryKey: true },
   targetKey: "user_id",
+  onDelete: "CASCADE",
+});
+db.Review.belongsTo(db.User, {
+  foreignKey: { name: "user_id", allowNull: false, primaryKey: true},
+  targetKey: "user_id",
+  onDelete: "CASCADE",
+})
+db.Review.belongsTo(db.University, {
+  foreignKey: { name: "univ_id", allowNull: false, primaryKey: true },
+  targetKey: "univ_id",
   onDelete: "CASCADE",
 });
 
