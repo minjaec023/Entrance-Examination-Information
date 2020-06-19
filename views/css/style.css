@@ -39,21 +39,23 @@ span {
   overflow-x: auto;
 }
 table {
+  margin: auto;
   border-collapse: collapse;
   border-radius: 2px;
-  border: none;
+
   margin-bottom: 100px;
   margin-top: 20px;
-  width: 80%;
+  width: fit-content;
   text-align: center;
 }
 th,
 td {
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
   text-align: center;
+  border-bottom: 1px solid #ddd;
   word-break: keep-all;
   font-weight: 300;
+  width: fit-content;
+  padding: 8px 30px;
 }
 th {
   background-color: #f3f3f3;
