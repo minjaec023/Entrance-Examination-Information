@@ -7,6 +7,10 @@
   left: 0;
   right: 0;
 }
+a {
+  text-decoration: none;
+  color: white;
+}
 .topnav a {
   color: white;
   float: right;
@@ -38,8 +42,9 @@ table {
   border-collapse: collapse;
   border-radius: 2px;
   border: none;
-
-  width: 100%;
+  margin-bottom: 100px;
+  margin-top: 20px;
+  width: 80%;
   text-align: center;
 }
 th,
@@ -51,8 +56,12 @@ td {
   font-weight: 300;
 }
 th {
-  background-color: #eeeeee;
+  background-color: #f3f3f3;
   color: black;
+  font-weight: normal;
+}
+tr:nth-child(even) {
+  background-color: #fbfbfb;
 }
 
 /* 버튼 */
@@ -76,8 +85,6 @@ button {
   color: black;
 }
 button a {
-  text-decoration: none;
-  color: white;
   font-weight: 400;
 }
 button:hover {
