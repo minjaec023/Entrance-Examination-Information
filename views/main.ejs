@@ -4,7 +4,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <title>Main Screen</title>
-    <div class="topnav"><a class="title" href="/">Project Name</a>
+    <div class="topnav"><a class="title" href="/">메인으로</a>
         <% if (!isAuthenticated) { %>
         <a href="/login">로그인</a>
         <a href="/signup">회원가입</a>
@@ -13,10 +13,15 @@
         <a href="/logout">로그아웃</a>
         <% } %>
     </div>
-    <a href="/"><img id="logo" src="image/logo.png" alt="My Image"></a>
+    <div>
+        <a href="/"><img id="logo" src="image/logo7.png" alt="My Image"></a>
+        <hr id="logoLine">
+    </div>
 </head>
 
 <body>
+    <div id="box">
+    <h1 id="menu">메뉴 선택</h1>
     <% if (isAuthenticated) { %>
     <button><a href="/recom">대학교 추천</a></button>
     <button><a href="/review">대학교 리뷰</a></button>
@@ -25,6 +30,7 @@
     <button class="btndisabled" title="로그인 후 이용해주세요!">대학교 리뷰</button>
     <% } %>
     <button><a href="/criterias/1">대학별 평가 기준 보기</a></button>
+    </div>
 </body>
 
 </html>

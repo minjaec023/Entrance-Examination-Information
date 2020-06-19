@@ -1,11 +1,19 @@
+/*폰트*/
+@font-face {
+  font-family: 'hanna';
+  src:url("../font/BMHANNA_11yrs_ttf.ttf");
+}
+
+
 .topnav {
   width: 100%;
-  height: 40px;
+  height: auto;
   position: fixed;
   background-color: #393e46;
   top: 0;
   left: 0;
   right: 0;
+  font-family: "hanna";
 }
 .topnav .title {
   color: white;
@@ -13,7 +21,6 @@
   margin: 10px 0;
   text-decoration: none;
   margin-left: 40px;
-  font-weight: 600;
 }
 a {
   text-decoration: none;
@@ -25,7 +32,6 @@ a {
   margin: 10px 0;
   text-decoration: none;
   margin-right: 40px;
-  font-weight: 600;
 }
 h1 {
   margin: 150px 0;
@@ -77,17 +83,19 @@ tr:nth-child(even) {
 /* 버튼 */
 button {
   cursor: pointer;
-  display: block;
-  width: 300px;
-  padding: 20px 0px;
-  margin: 10px auto;
-  background-color: #4ecca3;
-  color: white;
-  font-weight: 400;
-  border-radius: 2px;
-  border: none;
-  transition-duration: 0.4s;
-  transition: all 0.5s;
+    display: block;
+    width: 50%;
+    padding: 20px 0px;
+    margin: 10% auto;
+    background-color: #4ecca3;
+    color: white;
+    font-weight: 400;
+    border-radius: 20px;
+    border: none;
+    transition-duration: 0.4s;
+    transition: all 0.5s;
+    font-family: "hanna";
+    font-size: 150%;
 }
 .btndisabled {
   opacity: 0.6;
@@ -124,10 +132,38 @@ button:hover a:after {
 }
 /*로고이미지 */
 #logo {
-  width: 40%;
+  width: 50%;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 10%;
+  margin-top: 5%;
+  margin-bottom: 2%;
+}
+#logoLine{
+  width: 70%;
+  border: dashed 1.5px #93b3c0;
   margin-bottom: 5%;
-}  
+}
+#miniLogo{
+  width: 20%;
+}
+html {
+  background-color:#dbe5e2;
+  margin-bottom: 5%;
+}
+#box {
+  border: solid #93b3c0;
+  width: 70%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+  border-radius: 10px;
+  padding: 5%;
+  background-color: #d1dde2;
+}
+#menu{
+  font-family: "hanna";
+  margin: 0.01%;
+  font-size: 200%;
+}
