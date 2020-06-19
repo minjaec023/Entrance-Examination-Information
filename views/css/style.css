@@ -1,7 +1,100 @@
-h1
-{
-    color: blue;
-    text-align: center;
-    margin-top: 10%;
-    font-size: 400%;
+.topnav {
+  width: 100%;
+  height: 40px;
+  position: fixed;
+  background-color: #393e46;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+h1 {
+  margin-top: 100px;
+  margin-bottom: 150px;
+  text-align: center;
+}
+h1 a {
+  color: #393e46;
+  text-decoration: none;
+  font-size: 64px;
+}
+div,
+p,
+span {
+  font-weight: 100;
+}
+
+/* 테이블 */
+.tablecontainer {
+  overflow-x: auto;
+}
+table {
+  border-collapse: collapse;
+  border-radius: 2px;
+  border: none;
+
+  width: 100%;
+  text-align: center;
+}
+th,
+td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  word-break: keep-all;
+  font-weight: 300;
+}
+th {
+  background-color: #eeeeee;
+  color: black;
+}
+
+/* 버튼 */
+button {
+  cursor: pointer;
+  display: block;
+  width: 300px;
+  padding: 20px 0px;
+  margin: 10px auto;
+  background-color: #4ecca3;
+  color: white;
+  font-weight: 400;
+  border-radius: 2px;
+  border: none;
+  transition-duration: 0.4s;
+  transition: all 0.5s;
+}
+.btndisabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  color: black;
+}
+button a {
+  text-decoration: none;
+  color: white;
+  font-weight: 400;
+}
+button:hover {
+  background-color: #4ecca3; /* Green */
+  /*color: white;*/
+}
+button a {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+button a:after {
+  content: "\00bb";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+button:hover a {
+  padding-right: 25px;
+}
+button:hover a:after {
+  opacity: 1;
+  right: 0;
 }

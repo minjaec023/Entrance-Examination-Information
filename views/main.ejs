@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel = "stylesheet" type = "text/css" href = "css/style.css">
-        <title>Main Screen</title>
-        <% if (!isAuthenticated) { %>
-        <button><a href="/login">로그인</a></button>
-        <button><a href="/signup">회원가입</a></button>
-        <% } else { %>
-        <button><a href="/userscore">내 정보</a></button>
-        <button><a href="/logout">로그아웃</a></button>
-        <% } %>
-        <h1>Project Name</h1>
-    </head>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Main Screen</title>
+    <% if (!isAuthenticated) { %>
+    <button><a href="/login">로그인</a></button>
+    <button><a href="/signup">회원가입</a></button>
+    <% } else { %>
+    <button><a href="/userscore">내 정보</a></button>
+    <button><a href="/logout">로그아웃</a></button>
+    <% } %>
+    <h1><a href="/">Project Name</a></h1>
+</head>
+
 <body>
+    <% if (isAuthenticated) { %>
     <button><a href="/recom">대학교 추천</a></button>
     <button><a href="/review">대학교 리뷰</a></button>
+    <% } else { %>
+    <button class="btndisabled" title="로그인 후 이용해주세요!">대학교 추천</button>
+    <button class="btndisabled" title="로그인 후 이용해주세요!">대학교 리뷰</button>
+    <% } %>
     <button><a href="/criterias/1">대학별 평가 기준 보기</a></button>
 </body>
+
 </html>
