@@ -7,6 +7,14 @@
   left: 0;
   right: 0;
 }
+.topnav .title {
+  color: white;
+  float: left;
+  margin: 10px 0;
+  text-decoration: none;
+  margin-left: 40px;
+  font-weight: 600;
+}
 a {
   text-decoration: none;
   color: white;
