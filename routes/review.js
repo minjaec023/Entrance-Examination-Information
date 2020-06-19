@@ -399,8 +399,8 @@ var pool = mysql.createPool({
     connectionLimit: 10,
     host: 'localhost',
     user: 'root',
-    database: 'db_project',
-    password: '1234'
+    database: 'databaseProject',
+    password: 'ajou'
 })
     
     
