@@ -4,13 +4,15 @@
 <head>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <title>Main Screen</title>
-    <% if (!isAuthenticated) { %>
-    <button><a href="/login">로그인</a></button>
-    <button><a href="/signup">회원가입</a></button>
-    <% } else { %>
-    <button><a href="/userscore">내 정보</a></button>
-    <button><a href="/logout">로그아웃</a></button>
-    <% } %>
+    <div class="topnav">
+        <% if (!isAuthenticated) { %>
+        <a href="/login">로그인</a>
+        <a href="/signup">회원가입</a>
+        <% } else { %>
+        <a href="/userscore">내 정보</a>
+        <a href="/logout">로그아웃</a>
+        <% } %>
+    </div>
     <h1><a href="/">Project Name</a></h1>
 
 </head>

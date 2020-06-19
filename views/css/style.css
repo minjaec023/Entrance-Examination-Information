@@ -7,9 +7,16 @@
   left: 0;
   right: 0;
 }
+.topnav a {
+  color: white;
+  float: right;
+  margin: 10px 0;
+  text-decoration: none;
+  margin-right: 40px;
+  font-weight: 600;
+}
 h1 {
-  margin-top: 100px;
-  margin-bottom: 150px;
+  margin: 150px 0;
   text-align: center;
 }
 h1 a {
