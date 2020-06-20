@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>로그아웃</title>
-    </head>
-    <body>
-        <form action="/login" method="post">
-            <input type="text" name="userid" placeholder="id" /><br />
-            <input type="password" name="password" placeholder="password" /><br />
-            <input type="submit" />
-        </form>
-    </body>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>Main Screen</title>
+    <div class="topnav"><a class="title" href="/">메인으로</a>
+        <% if (!isAuthenticated) { %>
+        <a href="/login">로그인</a>
+        <a href="/signup">회원가입</a>
+        <% } else { %>
+        <a href="/userscore">내 정보</a>
+        <a href="/logout">로그아웃</a>
+        <% } %>
+    </div>
+    <div>
+        <a href="/"><img id="logo" src="image/logo7.png" alt="My Image"></a>
+        <hr id="logoLine">
+    </div>
+</head>
+
+<body>
+    <div id="box">
+    <h1 id="menu">아이디와 비밀번호를 입력해주세요.</h1>
+    <form action="/login" method="post">
+        <input class = "login" type="text" name="userid" placeholder="id" /><br />
+        <input calss = "login" type="password" name="password" placeholder="password" /><br />
+        <input id = "loginSubmit" type="submit" />
+    </form>
+    </div>
+</body>
+
 </html>

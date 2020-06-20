@@ -4,7 +4,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <title>Main Screen</title>
-    <div class="topnav"><a class="title" href="/">Project Name</a>
+    <div class="topnav"><a class="title" href="/">메인으로</a>
         <% if (!isAuthenticated) { %>
         <a href="/login">로그인</a>
         <a href="/signup">회원가입</a>
@@ -14,40 +14,43 @@
         <% } %>
     </div>
     <a href="/"><img id="logo" src="image/logo7.png" alt="My Image"></a>
-
+    <hr id="logoLine">
 </head>
 
 <body>
-    <table border="2" align="center" width="1000px" cellspacing="0">
+    <div id="box">
+    <h1 id="menu">성적 정보를 입력해주세요.</h1>
+    <table id="insertscore" cellspacing="0">
         <thead>
             <tr>
-                <th>달</th>
-                <th>표준점수/백분위</th>
-                <th>국어</th>
-                <th>수학</th>
-                <th>영어</th>
-                <th>탐구</th>
+                <th style="color: #2e6fdc;">달</th>
+                <th style="color: #2e6fdc;">표준점수/백분위</th>
+                <th style="color: #2e6fdc;">국어</th>
+                <th style="color: #2e6fdc;">수학</th>
+                <th style="color: #2e6fdc;">영어</th>
+                <th style="color: #2e6fdc;">탐구</th>
             </tr>
         </thead>
         <tbody>
             <form align="center" action="/insertscore" method="post">
                 <tr textalign="center">
-                    <td><input type="text" name="month"></td>
-                    <td><select name="sp">
+                    <td><input class="insert" type="text" name="month"></td>
+                    <td><select class="insert" name="sp">
 
                             <option value="s">표준점수</option>
                             <option value="p">백분위</option>
 
                         </select></td>
-                    <td><input type="text" name="korean"></td>
-                    <td><input type="text" name="math"></td>
-                    <td><input type="text" name="english"></td>
-                    <td><input type="text" name="inquiry"></td>
+                    <td><input class="insert" type="text" name="korean"></td>
+                    <td><input class="insert" type="text" name="math"></td>
+                    <td><input class="insert" type="text" name="english"></td>
+                    <td><input class="insert" type="text" name="inquiry"></td>
                 </tr>
         </tbody>
     </table>
     <button type="submit" value="제출">제출</button>
     </form>
+    </div>
 </body>
 
 </html>

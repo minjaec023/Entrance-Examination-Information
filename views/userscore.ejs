@@ -14,40 +14,46 @@
         <% } %>
     </div>
     <a href="/"><img id="logo" src="image/logo7.png" alt="My Image"></a>
-
+    <hr id="logoLine">
 </head>
 
 <body>
-
-    <p>
-        <strong>아이디 : </strong>
+    <div id="box">
+    <h1 id="menu">내 정보</h1>
+    <p class="info"> 
+        아이디 : 
         <% var id = user_id %>
-        <a>
-            <%= id %>
-        </a>
+        <%= id %>
     </p>
-    <p>
-        <strong>이름 : </strong>
+    <p class="info">
+        이름 : 
         <% var name = user_name %>
-        <a>
-            <%= user_name %>
-        </a>
+        <%= user_name %>
     </p>
-    <p>
+    <p class="info">
+        구분 : 
+        <% var division = division %>
+        <%= division %>
+    </p>
+    <hr id="logoLine" style="width:90%">
+    <h1 id="menu">
         <strong>성적 정보</strong>
-    </p>
+    </h1>
     <% if(!results[0]) {%>
-    <p>등록된 정보가 없습니다!</p>
+    <p class="info" style="color:red">등록된 정보가 없습니다!</p>
     <% } else { %>
-    <table border="2" align="center" width="1000px" cellspacing="0">
+    <div class="tablecontainer">
+    <table id="scoretable" cellspacing="0">
         <thead>
             <tr>
-                <th>달</th>
-                <th>표준점수/백분위</th>
-                <th>국어</th>
-                <th>수학</th>
-                <th>영어</th>
-                <th>탐구</th>
+                <th style="color: #2e6fdc;">달</th>
+                <th style="color: #2e6fdc;">표준점수/백분위</th>
+                <th style="color: #2e6fdc;">국어</th>
+                <th style="color: #2e6fdc;">수학</th>
+                <th style="color: #2e6fdc;">영어</th>
+                <th style="color: #2e6fdc;">탐구</th>
+                <th style="color: red;">수정</th>
+                <th style="color: red;">삭제</th>
             </tr>
         </thead>
         <tbody>
@@ -55,34 +61,39 @@
                     for(let result of results){ %>
             <tr align="center">
                 <form action="/modifyuserscore" method="post">
-                    <td><input type="text" name="month" value="<%= result.month %>" readonly
-                            style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;">
+                    <td><input class="score" type="text" name="month" value="<%= result.month %>" readonly
+                            style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;background-color:transparent;font-family: 'hanna';width: 50px;text-align: center;">
                     </td>
 
                     <% if(result.sp=='s') {%>
-                    <td><input type="text" name="sp" value="표준점수" readonly
-                            style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;">
+                    <td><input class="sp" type="text" name="sp" value="표준점수" readonly
+                            style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;background-color:transparent;font-family: 'hanna';text-align: center;width: 50px;text-align: center;">
                     </td>
                     <% } else { %>
-                    <td><input type="text" name="sp" value="백분위" readonly
-                            style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;">
+                    <td><input class="sp" type="text" name="sp" value="백분위" readonly
+                            style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;background-color:transparent;font-family: 'hanna';text-align: center;width: 50px;text-align: center;">
                     </td>
                     <% } %>
 
-                    <td><input type="text" name="korean" value="<%= result.korean %>"></input></td>
-                    <td><input type="text" name="math" value="<%= result.math %>"></input></td>
-                    <td><input type="text" name="english" value="<%= result.english %>"></input></td>
-                    <td><input type="text" name="inquiry" value="<%= result.inquiry %>"></input></td>
-                    <td><button type="submit" name="button" value="modify">수정하기</button></td>
-                    <td><button type="submit" name="button" value="delete">삭제하기</button></td>
+                    <td><input class="score" type="text" name="korean" value="<%= result.korean %>"
+                        style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;background-color:transparent;font-family: 'hanna';width: 50px;text-align: center;"></input></td>
+                    <td><input class="score" type="text" name="math" value="<%= result.math %>"
+                        style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;background-color:transparent;font-family: 'hanna';width: 50px;text-align: center;"></input></td>
+                    <td><input class="score" type="text" name="english" value="<%= result.english %>"
+                        style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;background-color:transparent;font-family: 'hanna';width: 50px;text-align: center;"></input></td>
+                    <td><input class="score" type="text" name="inquiry" value="<%= result.inquiry %>"
+                        style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;background-color:transparent;font-family: 'hanna';width: 50px;text-align: center;"></input></td>
+                    <td><button class="md" type="submit" name="button" value="modify">수정</button></td>
+                    <td><button class="md" type="submit" name="button" value="delete">삭제</button></td>
                 </form>
             </tr>
             <% } %>
             <% } %>
         </tbody>
-    </table>
+    </table></div>
     <% } %>
     <button><a href="/insertscore">성적 입력하기</a></button>
+    </div>
 </body>
 
 </html>

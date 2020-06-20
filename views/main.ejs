@@ -23,9 +23,11 @@
     <div id="box">
     <h1 id="menu">메뉴 선택</h1>
     <% if (isAuthenticated) { %>
+    <button><a href="/userscore">내 성적 입력/수정</a></button>
     <button><a href="/recom">대학교 추천</a></button>
     <button><a href="/review">대학교 리뷰</a></button>
     <% } else { %>
+    <button class="btndisabled" title="로그인 후 이용해주세요!">내 성적 입력/수정</button>
     <button class="btndisabled" title="로그인 후 이용해주세요!">대학교 추천</button>
     <button class="btndisabled" title="로그인 후 이용해주세요!">대학교 리뷰</button>
     <% } %>
