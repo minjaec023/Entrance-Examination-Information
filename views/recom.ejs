@@ -4,7 +4,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <title>Main Screen</title>
-    <div class="topnav"><a class="title" href="/">Project Name</a>
+    <div class="topnav"><a class="title" href="/">메인으로</a>
         <% if (!isAuthenticated) { %>
         <a href="/login">로그인</a>
         <a href="/signup">회원가입</a>
@@ -37,7 +37,7 @@
                 <td><%= score.month %></td>
                 <td><%= score.sp %></td>
                 <td><%= score.sum %></td>
-                <td>
+                <td width="400px">
                     <button><a href="/showrecom/<%= score.sum %>">추천 학과 보기</a></button>
                     <button><a href="/calcgrade/1">대학별 점수 보기</a></button>
                     <button><a href="/userscore">수정/삭제</a></button>

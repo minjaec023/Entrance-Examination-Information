@@ -55,6 +55,8 @@ router.get("/recom", function (req, res, next) {
 
 router.get("/showrecom/:score", function (req, res, next) {
   const score = req.params.score;
+  let keyword = req.query.keyword !== undefined ? req.query.keyword : "";
+  let keyword_like = "%" + keyword + "%";
 
   let token = req.cookies.user;
   let isAuthenticated;
@@ -73,13 +75,17 @@ router.get("/showrecom/:score", function (req, res, next) {
 
   Department.findAll({
     include: [{ model: University }],
-    where: { standard_score: { [Op.lt]: score } },
+    where: {
+      standard_score: { [Op.lt]: score },
+      depart_name: { [Op.like]: keyword_like },
+    },
     order: [["standard_score", "DESC"]],
   }).then(function (result) {
     res.render("showrecom", {
       std_score: score,
       result,
       isAuthenticated,
+      keyword: keyword,
     });
   });
 });
