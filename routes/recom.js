@@ -105,6 +105,7 @@ router.get("/criterias/:division", function (req, res, next) {
     include: [{ model: University }],
     where: { division: division },
   }).then(function (result) {
+    console.log(result);
     res.render("showcriteria", {
       criterias: result,
       univ_name: result[0].University.univ_name,
@@ -132,6 +133,7 @@ router.get("/calcgrade/:division", function (req, res, next) {
   }
 
   let list = [];
+  console.log(division);
   User_score.findOne({
     where: { user_id: decoded.user_id },
   }).then(function (score) {
