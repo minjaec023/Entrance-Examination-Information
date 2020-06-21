@@ -19,30 +19,38 @@
 
 <body>
     <div id="box">
-    <h1 id="menu">나의 표준점수 합: <%=std_score%></h1>
-    <form style="margin-top: 5%;" action="/showrecom/<%= std_score %>" align="center">
-        <input type="text" name="keyword" placeholder="관심 학과 검색" />
-        <button class="submit" type="submit" value="검색">검색</button>
-    </form>
-    <br /> <br /> <br />
-    <%if (keyword !== '') {%>
-    <p style="font-family: 'hanna';" align="center">검색어: <%= keyword %> </p>
-    <% } %>
-    <h1 id="menu" class="tabletitle" align="center">나의 추천 학과</h1>
-    <table>
-        <tr>
-            <th>대학</th>
-            <th>학과</th>
-            <th>표준점수</th>
-        </tr>
-        <% for (let res of result) {  %>
-        <tr align="center">
-            <td><%= res.University.univ_name %></td>
-            <td><%= res.depart_name %></td>
-            <td><%= res.standard_score %></td>
-        </tr>
+        <h1 id="menu">나의 표준점수 합: <%=std_score%></h1>
+        <form style="margin-top: 5%;" action="/showrecom/<%= std_score %>" align="center">
+            <input type="text" name="keyword" placeholder="관심 학과로 검색" />
+            <button class="submit" type="submit" value="검색">검색</button>
+            <br /><br />
+            <input type="text" name="location" placeholder="대학 소재지로 검색 (시/도)" />
+            <button class="submit" type="submit" value="검색">검색</button>
+        </form>
+        <br /> <br /> <br />
+        <%if (keyword !== '') {%>
+        <p style="font-family: 'hanna';" align="center">학과 키워드: <%= keyword %> </p>
+        <%} if (location !== '') {%>
+        <p style="font-family: 'hanna';" align="center">소재지: <%= location %> </p>
         <% } %>
-    </table>
+        <h1 id="menu" class="tabletitle" align="center">나의 추천 학과</h1>
+        <table>
+            <tr>
+                <th>대학</th>
+                <th>소재지</th>
+                <th>학과</th>
+                <th>표준점수</th>
+            </tr>
+            <% for (let res of list) {  %>
+            <tr align="center">
+                <td><%= res.University.univ_name %></td>
+                <td><%= locationlist[res.univ_id] %></td>
+                <td><%= res.depart_name %></td>
+                <td><%= res.standard_score %></td>
+            </tr>
+            <% } %>
+
+        </table>
 </body>
 
 </html>
