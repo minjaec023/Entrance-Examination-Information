@@ -397,10 +397,10 @@ router.get('/writereview', function(req, res, next){
 
 var pool = mysql.createPool({
     connectionLimit: 10,
-    host: 'localhost',
+    host: '18.217.146.151',
     user: 'root',
     database: 'databaseProject',
-    password: 'ajou'
+    password: '1234'
 })
     
     

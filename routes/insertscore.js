@@ -57,6 +57,7 @@ router.post('/insertscore', function(req, res, next){
             res.send('<script type="text/javascript"> alert("입력이 완료되었습니다!");location.href="/userscore" </script>');
         })
         .catch(err => {
+            console.log(err);
             res.send('<script type="text/javascript"> alert("이미 등록된 정보입니다!");location.href="/insertscore" </script>');
         })
     }
