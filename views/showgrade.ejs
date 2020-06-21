@@ -2,16 +2,25 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <title>Main Screen</title>
-
-    <h1>Project Name</h1>
+    <div class="topnav"><a class="title" href="/">메인으로</a>
+        <% if (!isAuthenticated) { %>
+        <a href="/login">로그인</a>
+        <a href="/signup">회원가입</a>
+        <% } else { %>
+        <a href="/userscore">내 정보</a>
+        <a href="/logout">로그아웃</a>
+        <% } %>
+    </div>
+    <a href="/"><img id="logo" src="../image/logo7.png" alt="My Image"></a>
+    <hr id="logoLine">
 </head>
 
 <body>
-    <p align="center">내 대학별 점수</p>
-
-    <table border="1" align="center" width="800px" cellspacing="0">
+    <div id="box">
+    <h1 id="menu">내 대학별 점수</h1>
+    <table>
         <tr>
             <th>대학</th>
             <th>점수</th>
@@ -23,6 +32,8 @@
         </tr>
         <% } %>
     </table>
+    <button><a href="/recom">뒤로가기</a></button>
+    </div>
 </body>
 
 </html>

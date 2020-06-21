@@ -33,12 +33,14 @@ router.get('/userscore', function(req, res, next){
         isAuthenticated = false;
     }
     let user_name;
+    let division;
     //아이디, 이름 받아오기
     User.findOne({
         where: {user_id : decoded.user_id},
     })
     .then((user) => {
         user_name = user.user_name;
+        division = user.division == 1 ? '문과' : '이과';
     })
     .then(() => {
         User_score.findAll({
@@ -52,7 +54,8 @@ router.get('/userscore', function(req, res, next){
                 isAuthenticated : isAuthenticated,
                 user_id : decoded.user_id,
                 user_name : user_name,
-                results: scores
+                results: scores,
+                division: division
             });
         });
     });

@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
         user_pw: { 
             type: DataTypes.STRING(10), 
             allowNull: false, 
+        },
+        division: { 
+            type: DataTypes.INTEGER, 
+            allowNull: false, 
         }, 
     },{ 
         tableName: "user",

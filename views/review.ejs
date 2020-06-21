@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel = "stylesheet" type = "text/css" href = "css/style.css">
-        <title>Main Screen</title>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>Main Screen</title>
+    <div class="topnav"><a class="title" href="/">메인으로</a>
         <% if (!isAuthenticated) { %>
-        <button><a href="/login">로그인</a></button>
-        <button><a href="/signup">회원가입</a></button>
+        <a href="/login">로그인</a>
+        <a href="/signup">회원가입</a>
         <% } else { %>
-        <button><a href="/userscore">내 정보</a></button>
-        <button><a href="/logout">로그아웃</a></button>
+        <a href="/userscore">내 정보</a>
+        <a href="/logout">로그아웃</a>
         <% } %>
-        <h1>Project Name</h1>
-    </head>
-    <body>
-        <button><a href="/showreview">리뷰보기</a></button>
-        <button><a href="/writereview">리뷰쓰기</a></button>
-    </body>
+    </div>
+    <a href="/"><img id="logo" src="image/logo7.png" alt="My Image"></a>
+
+</head>
+
+<body>
+    <button><a href="/showreview">리뷰보기</a></button>
+</body>
+
 </html>

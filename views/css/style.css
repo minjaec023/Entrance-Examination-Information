@@ -1,7 +1,229 @@
-h1
-{
-    color: blue;
-    text-align: center;
-    margin-top: 10%;
-    font-size: 400%;
+/*폰트*/
+@font-face {
+  font-family: "hanna";
+  src: url("../font/BMHANNA_11yrs_ttf.ttf");
+}
+
+.topnav {
+  width: 100%;
+  height: auto;
+  position: fixed;
+  background-color: #393e46;
+  top: 0;
+  left: 0;
+  right: 0;
+  font-family: "hanna";
+}
+.topnav .title {
+  color: white;
+  float: left;
+  margin: 10px 0;
+  text-decoration: none;
+  margin-left: 40px;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+.topnav a {
+  color: white;
+  float: right;
+  margin: 10px 0;
+  text-decoration: none;
+  margin-right: 40px;
+}
+h1 {
+  margin: 150px 0;
+  text-align: center;
+}
+h1 a {
+  color: #393e46;
+  text-decoration: none;
+  font-size: 64px;
+}
+div,
+p,
+span {
+  font-weight: 100;
+}
+
+/* 테이블 */
+.tablecontainer {
+  overflow-x: auto;
+}
+.tabletitle {
+  font-weight: 600;
+  font-size: 18px;
+}
+table {
+  margin: auto;
+  border-collapse: collapse;
+  border-radius: 2px;
+  font-family: "hanna";
+  margin-bottom: 100px;
+  margin-top: 20px;
+  width: fit-content;
+  text-align: center;
+}
+th,
+td {
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  word-break: keep-all;
+  font-weight: 300;
+  /*width: fit-content;*/
+  padding: 8px 30px;
+}
+th {
+  background-color: #f3f3f3;
+  color: black;
+  font-weight: normal;
+  text-align: center;
+}
+tr:nth-child(even) {
+  background-color: #fbfbfb;
+}
+tr:nth-child(odd) {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+input {
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border: none;
+  border-bottom: 1px solid #969ead93;
+}
+/* 버튼 */
+button {
+  cursor: pointer;
+  display: block;
+  width: 50%;
+  padding: 20px 0px;
+  margin: 10% auto;
+  background-color: #4ecca3;
+  color: white;
+  font-weight: 400;
+  border-radius: 20px;
+  border: none;
+  transition-duration: 0.4s;
+  transition: all 0.5s;
+  font-family: "hanna";
+  font-size: 150%;
+}
+.submit {
+  display: inline;
+  width: fit-content;
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 20px;
+  border-radius: 10px;
+}
+.btndisabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  color: black;
+}
+button a {
+  font-weight: 400;
+}
+button:hover {
+  background-color: #4ecca3; /* Green */
+  /*color: white;*/
+}
+button a {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+button a:after {
+  content: ">>";
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+button:hover a {
+  padding-right: 30px;
+}
+button:hover a:after {
+  opacity: 1;
+  right: 0;
+}
+/*로고이미지 */
+#logo {
+  width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+  margin-bottom: 2%;
+}
+#logoLine {
+  width: 70%;
+  border: dashed 1.5px #93b3c0;
+  margin-bottom: 5%;
+}
+#miniLogo {
+  width: 20%;
+}
+html {
+  background-color: #dbe5e2;
+  margin-bottom: 5%;
+}
+#box {
+  border: solid #93b3c0;
+  width: 70%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+  border-radius: 10px;
+  padding: 5%;
+  background-color: #d1dde2;
+}
+#menu {
+  font-family: "hanna";
+  margin: 0.01%;
+  font-size: 200%;
+}
+.login {
+  margin: 3%;
+}
+#loginSubmit{
+  cursor: pointer;
+  display: block;
+  width: 50%;
+  padding: 20px 0px;
+  margin: 5% auto;
+  background-color: #4ecca3;
+  color: white;
+  font-weight: 400;
+  border-radius: 20px;
+  border: none;
+  transition-duration: 0.4s;
+  transition: all 0.5s;
+  font-family: "hanna";
+  font-size: 150%;
+}
+.info{
+  font-family: "hanna";
+  margin: 4%;
+  font-size: 150%;
+}
+#scoretable{
+  margin-top: 5%;
+  font-family: "hanna";
+}
+.md{
+  width: 50px;
+  font-size: 100%;
+}
+#insertscore{
+  font-family: "hanna";
+  margin-top:10%;
+}
+.insert{
+  text-align: center;
+  width: 80px;
 }

@@ -12,7 +12,22 @@ let secretObj = require("../config/jwt");
 router.use(bodyParser.urlencoded({ extended: false}));
 
 router.get('/login', function(req, res, next){
-    res.render('login');
+    let token = req.cookies.user;
+    let isAuthenticated;
+    let decoded;
+    try {
+        decoded = jwt.verify(token, secretObj.secret);
+    } catch (error) {
+        decoded = false;
+    }
+    if (decoded) {
+        isAuthenticated = true;
+    } else {
+        isAuthenticated = false;
+    }
+    res.render("login", {
+        isAuthenticated,
+      });
 });
 
 router.post('/login', function(req, res, next){

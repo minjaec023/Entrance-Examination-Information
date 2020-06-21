@@ -2,17 +2,34 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <title>Main Screen</title>
-
-    <h1>Project Name</h1>
+    <div class="topnav"><a class="title" href="/">메인으로</a>
+        <% if (!isAuthenticated) { %>
+        <a href="/login">로그인</a>
+        <a href="/signup">회원가입</a>
+        <% } else { %>
+        <a href="/userscore">내 정보</a>
+        <a href="/logout">로그아웃</a>
+        <% } %>
+    </div>
+    <a href="/"><img id="logo" src="../image/logo7.png" alt="My Image"></a>
+    <hr id="logoLine">
 </head>
 
 <body>
-    <p align="center">나의 표준점수 합: <%=std_score%></p>
-    <p align="center">나의 추천 학과</p>
-
-    <table border="1" align="center" width="800px" cellspacing="0">
+    <div id="box">
+    <h1 id="menu">나의 표준점수 합: <%=std_score%></h1>
+    <form style="margin-top: 5%;" action="/showrecom/<%= std_score %>" align="center">
+        <input type="text" name="keyword" placeholder="관심 학과 검색" />
+        <button class="submit" type="submit" value="검색">검색</button>
+    </form>
+    <br /> <br /> <br />
+    <%if (keyword !== '') {%>
+    <p style="font-family: 'hanna';" align="center">검색어: <%= keyword %> </p>
+    <% } %>
+    <h1 id="menu" class="tabletitle" align="center">나의 추천 학과</h1>
+    <table>
         <tr>
             <th>대학</th>
             <th>학과</th>

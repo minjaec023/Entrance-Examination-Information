@@ -2,20 +2,30 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <title>Main Screen</title>
-
-    <h1>Project Name</h1>
+    <div class="topnav"><a class="title" href="/">메인으로</a>
+        <% if (!isAuthenticated) { %>
+        <a href="/login">로그인</a>
+        <a href="/signup">회원가입</a>
+        <% } else { %>
+        <a href="/userscore">내 정보</a>
+        <a href="/logout">로그아웃</a>
+        <% } %>
+    </div>
+    <a href="/"><img id="logo" src="../image/logo7.png" alt="My Image"></a>
+    <hr id="logoLine">
 </head>
 
 <body>
-    <p align="center">대학별 반영비</p>
+    <div id="box">
+    <h1 id="menu">대학별 반영비</h1>
     <button>
         <a href='/criterias/<%= division === "1" ? "2" : "1" %>'>
             <%= division === "1" ? '인문' : '자연'%> 기준으로 보기
         </a>
     </button>
-    <table border="1" align="center" width="800px" cellspacing="0">
+    <table>
         <tr>
             <th>대학</th>
             <th>구분</th>
@@ -35,6 +45,7 @@
         </tr>
         <% } %>
     </table>
+    </div>
 </body>
 
 </html>
