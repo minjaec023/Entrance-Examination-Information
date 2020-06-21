@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false, 
         }, 
     },{ 
-        tableName: "user_score",
+        tableName: "user_score2",
         timestamps: false,
         charset: "utf8",
     });

@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 
 <head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>Main Screen</title>
+    <div class="topnav"><a class="title" href="/">메인으로</a>
+        <a href="/userscore">내 정보</a>
+        <a href="/logout">로그아웃</a>
+    </div>
+    <div>
+        <a href="/"><img id="logo" src="/image/logo7.png" alt="My Image"></a>
+        <hr id="logoLine">
+    </div>
 </head>
 
 <body>
 
-    <div class="container">
-        <h2>검색된리뷰테이블</h2>
-        <br>
-        <br>
-        <p>검색된 리뷰테이블 목록입니다.</p>
-
+    <div class="tablecontainer">
+        <h1>검색된 리뷰 목록입니다!</h2>
+        <hr id="logoLine" style="width:90%">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -34,13 +35,13 @@
                 <% data.forEach(function (item,index){ %>
                 <tr>
                     <td>
-                        <a href='/detail/<%= item.review_id %>'></a><%= item.review_id %>
+                        <a href='/detail/<%= item.review_id %>' style="color: black"></a><%= item.review_id %>
                     </td>
                     <td>
                         <%= item.user_id %></a>
                     </td>
                     <td>
-                        <%= item.univ_id %>
+                        <%= item.univ_name %>
                     </td>
                     <td>
                         <%= item.depart_name %>
@@ -56,11 +57,6 @@
             </tbody>
         </table>
     </div>
-
-
-    <br>
-    <br>
-
 
     <div class="container">
         <ul class="pager">
@@ -85,7 +81,7 @@ if(curSet > 1){
 %>
 
             <li value=(startPage -1) class="previous">
-                <a href='/pasing/<%= ( startPage - 1) %>'>이전페이지</a>
+                <a href='/pasing/<%= ( startPage - 1) %>' style="color: black">이전페이지</a>
             </li>
 
             <%
@@ -100,7 +96,7 @@ if(i > totalPage){break;}
 if(i == curPage){
 %>
             <li value=<%= i %> class=''>
-                <a href='/pasing/<%= i %>'>
+                <a href='/pasing/<%= i %>' style="color: black">
                     <%= i %>
                 </a>
             </li>
@@ -110,7 +106,7 @@ if(i == curPage){
 %>
 
             <li value=<%= i %> class='active'>
-                <a href='/pasing/<%= i %>'>
+                <a href='/pasing/<%= i %>' style="color: black">
                     <%= i %>
                 </a>
             </li>
@@ -128,7 +124,7 @@ if(i == curPage){
 if(curSet < totalSet){
 %>
             <li value=( endPage + 1) class="next">
-                <a href='/pasing/<%= ( endPage + 1) %>'>다음페이지</a>
+                <a href='/pasing/<%= ( endPage + 1) %>' style="color: black">다음페이지</a>
             </li>
             <%
 }

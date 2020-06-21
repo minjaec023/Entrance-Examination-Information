@@ -18,6 +18,21 @@ router.use(bodyParser.urlencoded({ extended: false}));
 
 router.get("/pasing/:cur", function (req, res) {
 
+    let token = req.cookies.user;
+  let isAuthenticated;
+  let decoded;
+
+  try {
+    decoded = jwt.verify(token, secretObj.secret);
+  } catch (error) {
+    decoded = false;
+  }
+  if (decoded) {
+    isAuthenticated = true;
+  } else {
+    isAuthenticated = false;
+  }
+
     //페이지당 게시물 수 : 한 페이지 당 10개 게시물
     var page_size = 10;
 
@@ -91,7 +106,9 @@ router.get("/pasing/:cur", function (req, res) {
         console.log("몇번부터 몇번까지냐~~~~~~~" + no)
     
         //일단 쿼리로
-        var queryString = 'select * from review order by review_id desc limit ?,?';
+        var queryString = 'select review_id,user_id,grade,contents,depart_name,univ_name from review join university on review.univ_id = university.univ_id order by review_id desc limit ?,?';
+        //var queryString = 'select * from review order by review_id desc limit ?,?';
+        
         getConnection().query(queryString, [no, page_size], function (error, result) {
         if (error) {
                 console.log("페이징 에러" + error);
@@ -155,6 +172,20 @@ router.get('/review', function(req, res, next){
     
 //삭제
 router.get("/delete/:review_id", function (req, res) {
+    let token = req.cookies.user;
+  let isAuthenticated;
+  let decoded;
+
+  try {
+    decoded = jwt.verify(token, secretObj.secret);
+  } catch (error) {
+    decoded = false;
+  }
+  if (decoded) {
+    isAuthenticated = true;
+  } else {
+    isAuthenticated = false;
+  }
     console.log("삭제 진행")
     //일단 쿼리문
     getConnection().query('delete from review where review_id = ?', [req.params.id], function () {
@@ -164,6 +195,20 @@ router.get("/delete/:review_id", function (req, res) {
     
 //삽입 페이지
 router.get("/insert", function (req, res) {
+    let token = req.cookies.user;
+  let isAuthenticated;
+  let decoded;
+
+  try {
+    decoded = jwt.verify(token, secretObj.secret);
+  } catch (error) {
+    decoded = false;
+  }
+  if (decoded) {
+    isAuthenticated = true;
+  } else {
+    isAuthenticated = false;
+  }
     console.log("삽입 페이지 나와라")  
     fs.readFile('./views/insert.ejs', 'utf-8', function (error, data) {
     res.send(data)
@@ -186,11 +231,40 @@ router.post("/insert", function (req, res) {
         console.log("review_id : "+review_id+"\n" )
         var body = req.body;
         // var review_id = body.review_id
-        var user_id = body.user_id
-        var grade = body.grade
-        var contents = body.contents
-        var univ_id = body.univ_id
-        var depart_name = body.depart_name
+        let token = req.cookies.user;
+        let decoded;
+        var user_id;
+        try {
+            decoded = jwt.verify(token, secretObj.secret);
+            user_id = decoded.user_id;
+        } catch (error) {
+            decoded = false;
+        }
+        console.log("user_id : "+user_id+"\n")
+        //var user_id = body.user_id
+        var univ_name = body.univ_name
+        var univ_id
+        var queryString3 = "select univ_id from university where univ_name = '"+univ_name+"'"
+        console.log("querystring3 : "+queryString3+"\n")
+        getConnection().query(queryString3, function (error3,data) {
+            //응답
+            console.log("data :"+data+"\n")
+            univ_id = data[0].univ_id
+        
+            console.log("univ_id : "+univ_id+"\n" )
+            var grade = body.grade
+            var contents = body.contents
+            var depart_name = body.depart_name
+        
+            Review.create({ review_id : review_id, user_id : user_id, grade : grade, contents : contents, univ_id : univ_id, depart_name : depart_name})
+            .then(result => {
+                res.redirect('/review');
+            })
+            .catch(err => {
+                console.error(err);
+            })
+        })
+        
         
         //쿼리문
         //var queryString = "insert into review (`review_id`, `user_id`, `grade`, `contents`, `univ_id`, `depart_name`) VALUES ("+review_id+",'"+user_id+"',"+grade+",'"+contents+"',"+univ_id+",'"+depart_name+"'"+")"
@@ -201,13 +275,7 @@ router.post("/insert", function (req, res) {
         })*/
 
         //ORM
-        Review.create({ review_id : review_id, user_id : user_id, grade : grade, contents : contents, univ_id : univ_id, depart_name : depart_name})
-            .then(result => {
-                res.redirect('/review');
-            })
-            .catch(err => {
-                console.error(err);
-            })
+        
     })
     /*var body = req.body;
     // var review_id = body.review_id
@@ -226,6 +294,20 @@ router.post("/insert", function (req, res) {
 
 //서치 페이지
 router.get("/search", function (req, res, next) {
+    let token = req.cookies.user;
+  let isAuthenticated;
+  let decoded;
+
+  try {
+    decoded = jwt.verify(token, secretObj.secret);
+  } catch (error) {
+    decoded = false;
+  }
+  if (decoded) {
+    isAuthenticated = true;
+  } else {
+    isAuthenticated = false;
+  }
     console.log("서치 페이지 나와라")  
     fs.readFile('./views/search.ejs', 'utf-8', function (error, data) {
         res.send(data)
@@ -237,6 +319,20 @@ router.get("/search", function (req, res, next) {
 
 //서치 데이터 대학교이름과 학과이름으로
 router.post("/search", function (req, res) {
+  let token = req.cookies.user;
+  let isAuthenticated;
+  let decoded;
+
+  try {
+    decoded = jwt.verify(token, secretObj.secret);
+  } catch (error) {
+    decoded = false;
+  }
+  if (decoded) {
+    isAuthenticated = true;
+  } else {
+    isAuthenticated = false;
+  }
     console.log("서치 데이터 진행")
 
     //페이지당 게시물 수 : 한 페이지 당 30개 게시물
@@ -254,11 +350,11 @@ router.post("/search", function (req, res) {
     //일단 쿼리로
     var body = req.body;
     //'insert into review(grade,contents,univ_id,depart_name) values (?,?,?,?)'
-
+    // var queryString = 'select review_id,user_id,grade,contents,depart_name,univ_name from review join university on review.univ_id = university.univ_id order by review_id desc limit ?,?';
     // 'select count(review(univ_id,depart_name) values (?,?)) review(grade,contents,univ_id,depart_name) values (?,?,?,?)'
-    var univ_id = body.univ_id
+    var univ_name = body.univ_name
     var depart_name = body.depart_name
-    var queryString = "select count(*) as cnt from review where univ_id = "+univ_id +" and depart_name = '"+depart_name+"'"
+    var queryString = "select count(*) as cnt from review join university on review.univ_id = university.univ_id where univ_name = '"+univ_name +"' and depart_name = '"+depart_name+"'"
     console.log('\n1 쿼리 스트링 : '+queryString)
     getConnection().query(queryString, function (error2, data) {
         if (error2) {
@@ -319,7 +415,7 @@ router.post("/search", function (req, res) {
     
         //select count(*) as cnt from review where univ_id = ? and depart_name = ?
         //일단 쿼리로
-        var queryString = "select * from review where univ_id = "+univ_id+ " and depart_name = '" +depart_name+ "' order by review_id";
+        var queryString = "select review_id,user_id,grade,contents,depart_name,univ_name from review join university on review.univ_id = university.univ_id where univ_name = '"+univ_name+ "' and depart_name = '" +depart_name+ "' order by review_id";
         console.log('\n2 쿼리 스트링 : '+queryString)
         getConnection().query(queryString, [no, page_size], function (error, result) {
         if (error) {
@@ -347,6 +443,20 @@ router.post("/search", function (req, res) {
     
 //글상세보기
 router.get("/detail/:review_id", function (req, res) {
+    let token = req.cookies.user;
+  let isAuthenticated;
+  let decoded;
+
+  try {
+    decoded = jwt.verify(token, secretObj.secret);
+  } catch (error) {
+    decoded = false;
+  }
+  if (decoded) {
+    isAuthenticated = true;
+  } else {
+    isAuthenticated = false;
+  }
     console.log("디테일 진행")
     fs.readFile('./views/detail.ejs', 'utf-8', function (error, data) {
         //일단 쿼리

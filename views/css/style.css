@@ -190,7 +190,7 @@ html {
 .login {
   margin: 3%;
 }
-#loginSubmit{
+#loginSubmit {
   cursor: pointer;
   display: block;
   width: 50%;
@@ -206,24 +206,41 @@ html {
   font-family: "hanna";
   font-size: 150%;
 }
-.info{
+.info {
   font-family: "hanna";
   margin: 4%;
   font-size: 150%;
 }
-#scoretable{
+#scoretable {
   margin-top: 5%;
   font-family: "hanna";
 }
-.md{
+.md {
   width: 50px;
   font-size: 100%;
 }
-#insertscore{
+#insertscore {
   font-family: "hanna";
-  margin-top:10%;
+  margin-top: 10%;
 }
-.insert{
+.insert {
   text-align: center;
-  width: 80px;
+  width: 30px;
+}
+.select {
+  width: 70px;
+}
+
+ul.pager, ol.pager {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+  width: 100%;
+}
+
+ul.pager li, ol.pager li {
+  display: inline-block;
+  padding: 15px;
+  font-size: 16px;
 }

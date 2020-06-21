@@ -6,7 +6,7 @@ const { Router } = require("express");
 const router = express.Router();
 const { Op } = require("sequelize");
 
-const { University } = require("../models");
+const { University, UnivLocation } = require("../models");
 const { UnivCriteria } = require("../models");
 const { EngRatio } = require("../models");
 const { Department } = require("../models");
@@ -35,6 +35,12 @@ router.get("/recom", function (req, res, next) {
   User_score.findAll({
     where: { user_id: decoded.user_id },
   }).then((scores) => {
+    if (scores.length == 0) {
+      res.send(
+        '<script type="text/javascript"> alert("먼저 성적을 입력해주세요!");location.href="/insertscore" </script>'
+      );
+    }
+    console.log("ooo");
     for (let score of scores) {
       let result = {};
       result.month = score.month;
@@ -56,7 +62,9 @@ router.get("/recom", function (req, res, next) {
 router.get("/showrecom/:score", function (req, res, next) {
   const score = req.params.score;
   let keyword = req.query.keyword !== undefined ? req.query.keyword : "";
+  let location = req.query.location !== undefined ? req.query.location : "";
   let keyword_like = "%" + keyword + "%";
+  let location_like = "%" + location + "%";
 
   let token = req.cookies.user;
   let isAuthenticated;
@@ -74,20 +82,47 @@ router.get("/showrecom/:score", function (req, res, next) {
   }
 
   Department.findAll({
-    include: [{ model: University }],
+    include: [
+      {
+        model: University,
+      },
+    ],
     where: {
       standard_score: { [Op.lt]: score },
       depart_name: { [Op.like]: keyword_like },
     },
     order: [["standard_score", "DESC"]],
     limit: 10,
-  }).then(function (result) {
-    res.render("showrecom", {
-      std_score: score,
-      result,
-      isAuthenticated,
-      keyword: keyword,
-    });
+  }).then(function (results) {
+    let list = [];
+    let locationlist = [];
+    let countlist = [];
+    let count = 0;
+    while (count < results.length) {
+      let temp = results[count++];
+      UnivLocation.findOne({
+        where: {
+          univ_id: temp.University.univ_id,
+          city: { [Op.like]: location_like },
+        },
+      }).then(function (result) {
+        if (result !== null) {
+          list.push(temp);
+          locationlist[temp.univ_id] = result.city;
+        }
+        countlist.push(result);
+        if (countlist.length == results.length) {
+          res.render("showrecom", {
+            std_score: score,
+            list,
+            locationlist,
+            isAuthenticated,
+            keyword: keyword,
+            location: location,
+          });
+        }
+      });
+    }
   });
 });
 
