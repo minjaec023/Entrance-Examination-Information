@@ -10,21 +10,9 @@ module.exports = (sequelize, DataTypes) => {
       city: {
         type: DataTypes.STRING(30),
       },
-      gu: {
-        type: DataTypes.STRING(30),
-      },
-      latitude: {
-        type: DataTypes.DOUBLE,
-        allowNull: false,
-      },
-      longirude: {
-        type: DataTypes.DOUBLE,
-        allowNull: false,
-      },
     },
     {
       /* options */
-
       tableName: "univlocation",
       timestamps: false,
       charset: "utf8",

@@ -182,6 +182,7 @@ router.get("/calcgrade/:division", function (req, res, next) {
     UnivCriteria.findAll({
       include: [{ model: University }],
       where: { division: division },
+     
     }).then(function (results) {
       for (let result of results) {
         let calc = {};
@@ -224,7 +225,7 @@ router.get("/calcgrade/:division", function (req, res, next) {
               list.sort(function (a, b) {
                 return a.grade > b.grade ? -1 : a.grade < b.grade ? 1 : 0;
               });
-              res.render("showgrade", { list: list.sort(), isAuthenticated });
+              res.render("showgrade", { list: list, isAuthenticated });
             }
           });
       }

@@ -4,7 +4,7 @@ let jwt = require("jsonwebtoken");
 let secretObj = require("../config/jwt");
 const router = express.Router();
 const { Review } = require('../models');
-
+const { University } = require('../models');
 var fs = require('fs')
 var mysql = require('mysql')
 var ejs = require('ejs');
@@ -460,27 +460,31 @@ router.get("/detail/:review_id", function (req, res) {
     console.log("디테일 진행")
     fs.readFile('./views/detail.ejs', 'utf-8', function (error, data) {
         //일단 쿼리
-        /*getConnection().query('select * from review where user_id = ?', [req.params.user_id], function (error, result) {
+        var queryString4;
+        queryString4 = "select user_id,grade,contents,univ_name,depart_name from review join university on review.univ_id = university.univ_id where review_id = "+req.params.review_id;
+        getConnection().query(queryString4, function (error, result) {
         res.send(ejs.render(data, {
             data: result[0]
             }))
-        })*/
+        })
         //orm
+        /*
         Review.findAll({
             where: {
                 review_id : req.params.review_id
             }
         })
             .then(result => {
-                res.send(ejs.render(data, {
+                    res.send(ejs.render(data, {
                     data: result[0]
-                }))
+                }));
             })
             .catch(err => {
                 console.error(err);
             })
-
+            */
     });
+    
 })
     
 /*

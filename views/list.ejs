@@ -24,11 +24,27 @@
 </head>
 
 <body>
+    <div id="box">
+        
     <div class="tablecontainer">
-        <button><a href="/insert">추가하기</a></button>
-        <button><a href="/search">검색하기</a></button>
+        <div>
+        <button style="margin: auto;
+        width: 20%;
+        display: inline;
+        margin-right: 10%;
+        margin-bottom: 3%;
+        padding: 1%;"><a href="/insert">추가하기</a></button>
+        <button style="margin: auto;
+        width: 20%;
+        display: inline;
+        margin-left: 10%;
+        margin-bottom: 3%;
+        padding: 1%;"><a href="/search">검색하기</a></button>
+        </div>
         <hr id="logoLine" style="width:90%">
-        <table class="table table-striped">
+        <h1 id="menu">리뷰번호를 눌러 상세 내용을 볼 수 있습니다.</h1>
+        <table class="table table-striped" style="table-layout: fixed;
+        width: 80%;height:300px;margin-top: 7%;">
             <thead>
                 <tr>
                     <th>번호</th>
@@ -58,7 +74,9 @@
                     <td>
                         <%= item.grade %>
                     </td>
-                    <td>
+                    <td style="    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;">
                         <%= item.contents %>
                     </td>
                 </tr>
@@ -146,7 +164,7 @@ if(curSet < totalSet){
 
         </ul>
     </div>
-
+</div>
 </body>
 
 </html>

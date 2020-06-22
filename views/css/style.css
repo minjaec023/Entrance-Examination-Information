@@ -244,3 +244,21 @@ ul.pager li, ol.pager li {
   padding: 15px;
   font-size: 16px;
 }
+.form-group {
+  margin: auto;
+    width: 40%;
+    text-align: left;
+    margin-bottom: 2%;
+  font-family: "hanna";
+}
+.container{
+  margin-top:3%;
+}
+#contents{
+  width: 100%;
+  height: 100%;
+  resize: none;
+}
+.form-control{
+  font-family: "hanna";
+}
